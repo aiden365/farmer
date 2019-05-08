@@ -1,5 +1,6 @@
 package com.farmer.core.base;
 
+import com.farmer.core.GenerateBase;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -12,36 +13,19 @@ import java.util.List;
  **/
 
 @Data
-public class BaseXmlInfo {
+public class BaseXmlInfo extends GenerateBase {
 
     /**
-     * mapper全限名
+     * mapper所在报名
      */
-    private String mapperAllName;
-
-    /**
-     * mapper全限名
-     */
-    private String entityAllName;
-
-    /**
-     * mapper全限名
-     */
-    private List<XmlFieldInfo> fields = new ArrayList<>();
+    protected String mapperPackageName;
 
 
-    @Data
-    class XmlFieldInfo{
-
-        private Boolean isKey;
-
-        private String columnName;
-
-        private String dataType;
-
-        private String propertyName;
+    public BaseXmlInfo() {
     }
-
+    public BaseXmlInfo(String mapperPackageName) {
+        this.mapperPackageName = mapperPackageName;
+    }
 }
 
 

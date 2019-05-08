@@ -19,12 +19,16 @@ import java.util.stream.Collectors;
  * */
 public class GenerateBase {
 
+
     protected static String driver;
     protected static String url;
     protected static String username;
     protected static String password;
 
-
+    /**
+     * 输出路径
+     */
+    protected static String outPath;
 
     /**
      * 数据库名称
@@ -65,6 +69,7 @@ public class GenerateBase {
                 case 3 : GenerateBase.password  = params[i]; break;
                 case 4 : GenerateBase.databaseName  = params[i]; break;
                 case 5 : GenerateBase.tableName  = params[i]; break;
+                case 6 : GenerateBase.outPath  = params[i]; break;
             }
         }
 

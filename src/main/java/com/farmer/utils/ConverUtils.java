@@ -25,7 +25,7 @@ public class ConverUtils {
     static {
 
         typeMap.put("int", "Long");
-        typeMap.put("int", "Long");
+        typeMap.put("bigint", "Long");
 
         typeMap.put("float", "Double");
         typeMap.put("double", "Double");

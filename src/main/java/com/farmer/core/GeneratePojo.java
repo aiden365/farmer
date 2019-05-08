@@ -11,20 +11,15 @@ import com.farmer.utils.ConverUtils;
 import com.farmer.utils.TemplateUtils;
 import lombok.Data;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
 public class GeneratePojo extends BaseClassInfo{
 
-
-    public static final String DEFAULT_PACKAGENAME = ConstKit.DEFAULT_PACKAGENAME  + ".entity";
-    public static final String DEFAULT_BASEPACKAGEALLNAME = ConstKit.DEFAULT_BASEPACKAGEALLNAME  + ".BaseEntity.java";
-
+    public static final String DEFAULT_PACKAGENAME = ConstKit.DEFAULT_PACKAGE_NAME + ".entity";
+    public static final String DEFAULT_BASEPACKAGEALLNAME = ConstKit.DEFAULT_BASE_PACKAGE_ALL_NAME + ".BaseEntity";
 
     public GeneratePojo(String packageName, String basePackageAllName, String author){
 
@@ -44,6 +39,12 @@ public class GeneratePojo extends BaseClassInfo{
 
             System.out.printf("did not find tables, please first init");
             return;
+        }
+
+        //检查目录父级
+        File parentFile = new File(outPath + ConstKit.POJO_OUT_PATH);
+        if(!parentFile.exists()){
+            parentFile.mkdirs();
         }
 
         GenerateBase.fieldInfoMaps.forEach(this::accept);
@@ -68,7 +69,6 @@ public class GeneratePojo extends BaseClassInfo{
 
         String primaryKeyType = ConverUtils.converJavaType(fieldInfo.getDatabaseType());
 
-
         params.put("packageName", packageName);
         params.put("basePackageAllName", basePackageAllName);
         params.put("annotation", tableInfo.getAnnotation());
@@ -79,14 +79,10 @@ public class GeneratePojo extends BaseClassInfo{
         params.put("primaryKeyType", primaryKeyType);
         params.put("fields", fields);
 
-        System.out.println(params.toJSONString());
-
 
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-             FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\chenj\\Desktop\\temp\\1.java")){
-
+             FileOutputStream fileOutputStream = new FileOutputStream(outPath + ConstKit.POJO_OUT_PATH + "/" + className + ConstKit.OUT_FILE_SUFFIX)){
             TemplateUtils.exportFreemarkerTemplate("pojo.ftl", byteArrayOutputStream, params);
-
             byteArrayOutputStream.writeTo(fileOutputStream);
 
         } catch (FileNotFoundException e) {

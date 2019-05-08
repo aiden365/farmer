@@ -3,6 +3,8 @@ package com.farmer.utils;
 import cn.hutool.extra.template.Template;
 import cn.hutool.extra.template.TemplateConfig;
 import cn.hutool.extra.template.engine.freemarker.FreemarkerEngine;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -16,7 +18,7 @@ import java.util.Map;
  **/
 public class TemplateUtils {
 
-    public static void exportFreemarkerTemplate(String templateName, ByteArrayOutputStream bos, Map<String, Object> params) throws FileNotFoundException {
+    public static void exportFreemarkerTemplate(String templateName, ByteArrayOutputStream bos, JSONObject params) throws FileNotFoundException {
 
         TemplateConfig templateConfig = new TemplateConfig(ConstKit.TEMPLATE_PATH, TemplateConfig.ResourceMode.CLASSPATH);
 
@@ -29,8 +31,12 @@ public class TemplateUtils {
             throw new FileNotFoundException("目标流不存在");
         }
 
+        String paramsString = JSONObject.toJSONString(params, SerializerFeature.WriteNullStringAsEmpty);
+
+        System.out.println(paramsString);
+
         //渲染并输出模板
-        template.render(params,bos);
+        template.render(JSONObject.parseObject(paramsString),bos);
     }
 
 }

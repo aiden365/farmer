@@ -1,6 +1,6 @@
 package ${packageName};
 
-${basePackageAllName?if_exists?string("import ${basePackageAllName};","")}
+${(basePackageAllName??)?string("import ${basePackageAllName?if_exists};","")}
 
 /**
  * ${annotation}
@@ -8,7 +8,7 @@ ${basePackageAllName?if_exists?string("import ${basePackageAllName};","")}
  * @version 1.0
  * @data ${createDate}
  **/
-public interface ${className} ${baseClassName?if_exists?string("${baseClassName}<${primaryKeyType}>","")}{
+public interface ${className} ${(baseClassName??)?string("${baseClassName?if_exists}<${primaryKeyType}>","")}{
 
 
 }

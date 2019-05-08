@@ -2,6 +2,7 @@ package com.farmer.main;
 
 import com.farmer.core.GenerateBase;
 import com.farmer.core.GeneratePojo;
+import com.farmer.core.GenerateService;
 import com.farmer.exception.ParamsMissingException;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
@@ -17,7 +18,7 @@ import java.sql.SQLSyntaxErrorException;
 public class Main {
 
     private static String driver = "com.mysql.jdbc.Driver";
-    private static String url = "jdbc:mysql://192.168.160.128:3306";
+    private static String url = "jdbc:mysql://212.103.62.162:3306";
     private static String username = "root";
     private static String password = "123456";
 
@@ -37,9 +38,16 @@ public class Main {
         url += "/" + databaseName;
     }
 
+    /**
+     * 输出路径
+     */
+    protected static String outPath = "F:\\outPath";
+
     public static void main(String[] args) {
+
+
         try {
-            GenerateBase.init(driver, url, username, password, databaseName, tableName);
+            GenerateBase.init(driver, url, username, password, databaseName, tableName, outPath);
         } catch (ParamsMissingException e) {
 
             e.printStackTrace();
@@ -60,8 +68,12 @@ public class Main {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        GeneratePojo generateBase = new GeneratePojo(null,null,null);
-        generateBase.generate();
+
+        GeneratePojo generatePojo = new GeneratePojo(null,null,null);
+        generatePojo.generate();
+
+        GenerateService generateService = new GenerateService(null,null,null);
+        generateService.generate();
 
 
 

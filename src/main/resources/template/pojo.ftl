@@ -1,7 +1,8 @@
 package ${packageName};
 
 import lombok.Data;
-${((basePackageAllName)??)?string("import ${basePackageAllName};","")}
+${(basePackageAllName??)?string("import ${basePackageAllName?if_exists };","")}
+
 
 
 /**
@@ -11,7 +12,7 @@ ${((basePackageAllName)??)?string("import ${basePackageAllName};","")}
  * @data ${createDate}
  **/
 @Date
-public class ${className} ${((baseClassName)??)?string("${baseClassName}<${primaryKeyType}>","")}{
+public class ${className} ${(baseClassName??)?string("${baseClassName?if_exists}<${primaryKeyType}>","")}{
 
    <#list fields as field>
     /**
@@ -22,3 +23,4 @@ public class ${className} ${((baseClassName)??)?string("${baseClassName}<${prima
    </#list>
 
 }
+

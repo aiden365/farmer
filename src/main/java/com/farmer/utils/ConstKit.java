@@ -9,10 +9,9 @@ package com.farmer.utils;
 public class ConstKit {
 
     /**
-     * 去要检查的参数
+     * 需要检查的参数
      */
     public static final String[] VALIDATA_PARAMS = new String[]{"driver", "url", "username", "password"};
-
 
     /**
      * 默认当前数据库名
@@ -37,11 +36,47 @@ public class ConstKit {
      */
     public static final String TEMPLATE_PATH = "template";
 
+    /**
+     * 生成的类文件后缀
+     */
+    public static final String OUT_FILE_SUFFIX= ".java";
 
-    public static final String DEFAULT_PACKAGENAME = "com.vegetables.project";
-    public static final String DEFAULT_BASEPACKAGEALLNAME = "com.vegetables.project.base";
+    /**
+     * 生成的mybatis文件后缀
+     */
+    public static final String OUT_MYBATIS_FILE_SUFFIX= ".xml";
+
+
+
+    /**
+     * 实体类存放目录
+     */
+    public static final String POJO_OUT_PATH = "/pojo";
+
+    /**
+     * 业务接口存放目录
+     */
+    public static final String SERVICE_OUT_PATH = "/service";
+
+    /**
+     * 业务接口实现类存放目录
+     */
+    public static final String SERVICE_IMPL_OUT_PATH = "/service/impl";
+
+    /**
+     * 数据层接口存放目录
+     */
+    public static final String MAPPER_OUT_PATH = "/mapper";
+
+    /**
+     * mybaties配置文件存放目录
+     */
+    public static final String XML_OUT_PATH = "/xml";
+
+    public static final String DEFAULT_PACKAGE_NAME = "com.vegetables.project";
+    public static final String DEFAULT_BASE_PACKAGE_ALL_NAME = "com.vegetables.project.base";
+
     public static final String DEFAULT_AUTHOR = "automatic";
-
     public static final String DEFAULT_FORMAT = "yyyy-MM-dd HH:mm";
 
 
