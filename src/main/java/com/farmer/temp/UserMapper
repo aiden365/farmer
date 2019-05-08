@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" " http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deskmedia.core.mapper.BoardroomMapper">
+    <resultMap id="BaseResultMap" type="com.deskmedia.core.entity.Boardroom">
+
+        <id column="PKID" jdbcType="INTEGER" property="pkid"/>
+        <result column="RoomNo" jdbcType="VARCHAR" property="roomNo"/>
+        <result column="RoomName" jdbcType="VARCHAR" property="roomName"/>
+        <result column="DirectionForUse" jdbcType="VARCHAR" property="directionForUse"/>
+        <result column="RType" jdbcType="INTEGER" property="rType"/>
+        <result column="RStatus" jdbcType="INTEGER" property="rStatus"/>
+        <result column="Sort" jdbcType="INTEGER" property="sort"/>
+        <result column="FillTime" jdbcType="TIMESTAMP" property="fillTime"/>
+        <result column="Ext1" jdbcType="VARCHAR" property="ext1"/>
+        <result column="Ext2" jdbcType="VARCHAR" property="ext2"/>
+        <result column="Ext3" jdbcType="VARCHAR" property="ext3"/>
+        <result column="LayoutChart" jdbcType="INTEGER" property="layoutChart"/>
+        <result column="GUID" jdbcType="VARCHAR" property="guid"/>
+
+    </resultMap>
+
+</mapper>
