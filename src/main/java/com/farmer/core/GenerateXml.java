@@ -18,9 +18,10 @@ import java.util.stream.Collectors;
 public class GenerateXml extends BaseXmlInfo {
 
     public static final String DEFAULT_MAPPER_PACKAGE_NAME = ConstKit.DEFAULT_PACKAGE_NAME + ".mapper";
+    public static final String DEFAULT_PACKAGE_NAME = ConstKit.DEFAULT_PACKAGE_NAME + ".entity";
 
-    public GenerateXml(String mapperPackageName){
-        super(StrUtil.emptyToDefault(mapperPackageName,DEFAULT_MAPPER_PACKAGE_NAME ));
+    public GenerateXml(String mapperPackageName, String pojoPackageName){
+        super(StrUtil.emptyToDefault(mapperPackageName,DEFAULT_MAPPER_PACKAGE_NAME ), StrUtil.emptyToDefault(pojoPackageName,DEFAULT_PACKAGE_NAME ));
     }
 
     /**
@@ -39,7 +40,7 @@ public class GenerateXml extends BaseXmlInfo {
         }
 
         //检查目录父级
-        File parentFile = new File(outPath + ConstKit.POJO_OUT_PATH);
+        File parentFile = new File(outPath + ConstKit.XML_OUT_PATH);
         if(!parentFile.exists()){
             parentFile.mkdirs();
         }
@@ -54,14 +55,14 @@ public class GenerateXml extends BaseXmlInfo {
 
         List<GenerateXml.XmlField> fields = fieldInfos.stream().map(fieldInfo -> {
 
-            return new GenerateXml.XmlField(fieldInfo.getIsKey() == 1, fieldInfo.getName(), fieldInfo.getDatabaseType(), ConverUtils.converJavaProperty(fieldInfo.getName()));
+            return new GenerateXml.XmlField(fieldInfo.getIsKey() == 1, fieldInfo.getName(), ConverUtils.converJavaType(fieldInfo.getDatabaseType()), ConverUtils.converJavaProperty(fieldInfo.getName()));
 
         }).collect(Collectors.toList());
 
         String className = ConverUtils.converJavaClassName(key);
 
-        params.put("mapperAllName", mapperPackageName + "." + className);
-        params.put("className", DEFAULT_MAPPER_PACKAGE_NAME + "." +  className);
+        params.put("mapperAllName", mapperPackageName + "." + className + ConstKit.MAPPER_NAME_MARK);
+        params.put("entityAllName", pojoPackageName + "." +  className);
         params.put("fields", fields);
 
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

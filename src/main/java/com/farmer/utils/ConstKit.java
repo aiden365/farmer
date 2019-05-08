@@ -73,11 +73,31 @@ public class ConstKit {
      */
     public static final String XML_OUT_PATH = "/xml";
 
+
+    /**
+     * 业务接口名标志
+     */
+    public static final String SERVICE_NAME_MARK = "Service";
+
+    /**
+     * 业务接口实现类存放目录
+     */
+    public static final String SERVICE_IMPL_NAME_MARK= "ServiceImpl";
+
+    /**
+     * 数据层接口存放目录
+     */
+    public static final String MAPPER_NAME_MARK = "Mapper";
+
+
+
     public static final String DEFAULT_PACKAGE_NAME = "com.vegetables.project";
     public static final String DEFAULT_BASE_PACKAGE_ALL_NAME = "com.vegetables.project.base";
 
     public static final String DEFAULT_AUTHOR = "automatic";
     public static final String DEFAULT_FORMAT = "yyyy-MM-dd HH:mm";
+
+
 
 
 

@@ -8,7 +8,7 @@ ${(basePackageAllName??)?string("import ${basePackageAllName?if_exists};","")}
  * @version 1.0
  * @data ${createDate}
  **/
-public interface ${className} ${(baseClassName??)?string("${baseClassName?if_exists}<${primaryKeyType}>","")}{
+public interface ${className} ${(baseClassName??)?string("extends ${baseClassName?if_exists}<${pojoName}>","")}{
 
 
 }

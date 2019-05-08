@@ -51,7 +51,10 @@ public class GenerateServiceImpl extends BaseClassInfo {
 
         TableInfo tableInfo = GenerateBase.tableInfos.stream().filter(v -> key.equals(v.getName())).findFirst().get();
 
-        String className = ConverUtils.converJavaClassName(key);
+        String pojoName = ConverUtils.converJavaClassName(key);
+
+        String serviceImplName = pojoName + ConstKit.SERVICE_IMPL_NAME_MARK;
+        String serviceName = pojoName + ConstKit.SERVICE_NAME_MARK;
 
         FieldInfo fieldInfo = fieldInfos.stream().filter(v -> v.getIsKey() == 1).findFirst().get();
 
@@ -62,12 +65,14 @@ public class GenerateServiceImpl extends BaseClassInfo {
         params.put("annotation", tableInfo.getAnnotation());
         params.put("author", author);
         params.put("createDate", DateUtil.format(createDate,ConstKit.DEFAULT_FORMAT));
-        params.put("className", className);
+        params.put("className", serviceImplName);
+        params.put("serviceName", serviceName);
+        params.put("pojoName", pojoName);
         params.put("baseClassName", baseClassName);
         params.put("primaryKeyType", primaryKeyType);
 
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-             FileOutputStream fileOutputStream = new FileOutputStream(outPath + ConstKit.SERVICE_IMPL_OUT_PATH + "/" + className + ConstKit.OUT_FILE_SUFFIX)){
+             FileOutputStream fileOutputStream = new FileOutputStream(outPath + ConstKit.SERVICE_IMPL_OUT_PATH + "/" + serviceImplName + ConstKit.OUT_FILE_SUFFIX)){
             TemplateUtils.exportFreemarkerTemplate("serviceImpl.ftl", byteArrayOutputStream, params);
             byteArrayOutputStream.writeTo(fileOutputStream);
 

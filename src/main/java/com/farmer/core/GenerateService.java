@@ -50,7 +50,9 @@ public class GenerateService extends BaseClassInfo {
 
         TableInfo tableInfo = GenerateBase.tableInfos.stream().filter(v -> key.equals(v.getName())).findFirst().get();
 
-        String className = ConverUtils.converJavaClassName(key);
+        String pojoName = ConverUtils.converJavaClassName(key);
+
+        String className = pojoName + ConstKit.SERVICE_NAME_MARK;
 
         FieldInfo fieldInfo = fieldInfos.stream().filter(v -> v.getIsKey() == 1).findFirst().get();
 
@@ -62,6 +64,7 @@ public class GenerateService extends BaseClassInfo {
         params.put("author", author);
         params.put("createDate", DateUtil.format(createDate,ConstKit.DEFAULT_FORMAT));
         params.put("className", className);
+        params.put("pojoName", pojoName);
         params.put("baseClassName", baseClassName);
         params.put("primaryKeyType", primaryKeyType);
 

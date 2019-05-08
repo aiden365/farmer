@@ -20,11 +20,18 @@ public class BaseXmlInfo extends GenerateBase {
      */
     protected String mapperPackageName;
 
+    /**
+     * 实体类所在报名
+     */
+    protected String pojoPackageName;
+
 
     public BaseXmlInfo() {
     }
-    public BaseXmlInfo(String mapperPackageName) {
+    public BaseXmlInfo(String mapperPackageName, String pojoPackageName) {
         this.mapperPackageName = mapperPackageName;
+        this.pojoPackageName = pojoPackageName;
+
     }
 }
 

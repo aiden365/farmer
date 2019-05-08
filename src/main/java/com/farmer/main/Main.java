@@ -1,8 +1,6 @@
 package com.farmer.main;
 
-import com.farmer.core.GenerateBase;
-import com.farmer.core.GeneratePojo;
-import com.farmer.core.GenerateService;
+import com.farmer.core.*;
 import com.farmer.exception.ParamsMissingException;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 
@@ -41,7 +39,7 @@ public class Main {
     /**
      * 输出路径
      */
-    protected static String outPath = "F:\\outPath";
+    protected static String outPath = "F:\\outPath\\temp";
 
     public static void main(String[] args) {
 
@@ -75,7 +73,14 @@ public class Main {
         GenerateService generateService = new GenerateService(null,null,null);
         generateService.generate();
 
+        GenerateServiceImpl generateService1 = new GenerateServiceImpl(null,null,null);
+        generateService1.generate();
 
+        GenerateDao generateDao = new GenerateDao(null,null);
+        generateDao.generate();
+
+        GenerateXml generateXml = new GenerateXml(null, null);
+        generateXml.generate();
 
     }
 

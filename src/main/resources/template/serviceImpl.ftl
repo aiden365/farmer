@@ -8,7 +8,7 @@ ${(basePackageAllName??)?string("import ${basePackageAllName?if_exists};","")}
  * @version 1.0
  * @data ${createDate}
  **/
-public class ${className} ${(baseClassName??)?string("${baseClassName?if_exists}<${primaryKeyType}>","")}{
+public class ${className} ${(baseClassName??)?string("extends ${baseClassName?if_exists}<${pojoName}>","")} implements ${serviceName}{
 
 
 }

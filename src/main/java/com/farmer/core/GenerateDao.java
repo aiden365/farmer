@@ -50,7 +50,7 @@ public class GenerateDao extends BaseClassInfo {
 
         TableInfo tableInfo = GenerateBase.tableInfos.stream().filter(v -> key.equals(v.getName())).findFirst().get();
 
-        String className = ConverUtils.converJavaClassName(key);
+        String className = ConverUtils.converJavaClassName(key) + ConstKit.MAPPER_NAME_MARK;
 
         params.put("packageName", packageName);
         params.put("annotation", tableInfo.getAnnotation());
