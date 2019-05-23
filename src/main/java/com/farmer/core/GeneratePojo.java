@@ -56,7 +56,7 @@ public class GeneratePojo extends BaseClassInfo{
 
         List<Field> fields = fieldInfos.stream().map(fieldInfo -> {
 
-            return new Field(ConverUtils.converJavaType(fieldInfo.getDatabaseType()), fieldInfo.getAnnotation(), ConverUtils.converJavaProperty(fieldInfo.getName()));
+            return new Field(ConverUtils.converJavaType(fieldInfo.getDatabaseType()), fieldInfo.getAnnotation(), ConverUtils.converJavaProperty(fieldInfo.getName()), fieldInfo.getName());
 
         }).collect(Collectors.toList());
 
@@ -69,7 +69,7 @@ public class GeneratePojo extends BaseClassInfo{
 
         String primaryKeyType = ConverUtils.converJavaType(fieldInfo.getDatabaseType());
 
-        params.put("packageName", packageName);
+        params.put("packageName", packageName + "." + ConstKit.DEFAULT_POJO_PACKAGE_NAME);
         params.put("basePackageAllName", basePackageAllName);
         params.put("annotation", tableInfo.getAnnotation());
         params.put("author", author);
@@ -78,6 +78,9 @@ public class GeneratePojo extends BaseClassInfo{
         params.put("baseClassName", baseClassName);
         params.put("primaryKeyType", primaryKeyType);
         params.put("fields", fields);
+        params.put("tableName", key);
+
+
 
 
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -98,11 +101,14 @@ public class GeneratePojo extends BaseClassInfo{
         private String javaType;
         private String annotation;
         private String propertyName;
+        private String columnName;
 
-        public Field(String javaType, String annotation, String propertyName) {
+
+        public Field(String javaType, String annotation, String propertyName, String columnName) {
             this.javaType = javaType;
             this.annotation = annotation;
             this.propertyName = propertyName;
+            this.columnName = columnName;
         }
     }
 

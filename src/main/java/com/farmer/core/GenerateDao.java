@@ -17,9 +17,10 @@ import java.util.List;
 public class GenerateDao extends BaseClassInfo {
 
     public static final String DEFAULT_PACKAGENAME = ConstKit.DEFAULT_PACKAGE_NAME + ".dao";
+    public static final String DEFAULT_BASEPACKAGEALLNAME = ConstKit.DEFAULT_BASE_PACKAGE_ALL_NAME + ".BaseRepository";
 
-    public GenerateDao(String packageName, String author){
-        super(StrUtil.emptyToDefault(packageName,DEFAULT_PACKAGENAME ),  author);
+    public GenerateDao(String packageName, String basePackageAllName, String author){
+        super(StrUtil.emptyToDefault(packageName,DEFAULT_PACKAGENAME ), StrUtil.emptyToDefault(basePackageAllName, DEFAULT_BASEPACKAGEALLNAME),  author);
     }
 
     /**
@@ -50,13 +51,25 @@ public class GenerateDao extends BaseClassInfo {
 
         TableInfo tableInfo = GenerateBase.tableInfos.stream().filter(v -> key.equals(v.getName())).findFirst().get();
 
+        String pojoName = ConverUtils.converJavaClassName(key);
         String className = ConverUtils.converJavaClassName(key) + ConstKit.MAPPER_NAME_MARK;
 
-        params.put("packageName", packageName);
+        FieldInfo fieldInfo = fieldInfos.stream().filter(v -> v.getIsKey() == 1).findFirst().get();
+        String primaryKeyType = ConverUtils.converJavaType(fieldInfo.getDatabaseType());
+
+        String pojoPackageAllName = StrUtil.concat(false, packageName,".",ConstKit.DEFAULT_POJO_PACKAGE_NAME,".", pojoName);
+
+        params.put("packageName", packageName + "." + ConstKit.DEFAULT_REPOSITORY_PACKAGE_NAME);
         params.put("annotation", tableInfo.getAnnotation());
         params.put("author", author);
         params.put("createDate", DateUtil.format(createDate,ConstKit.DEFAULT_FORMAT));
         params.put("className", className);
+
+        params.put("pojoName", pojoName);
+        params.put("baseClassName", baseClassName);
+        params.put("basePackageAllName", basePackageAllName);
+        params.put("primaryKeyType", primaryKeyType);
+        params.put("pojoPackageAllName", pojoPackageAllName);
 
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
              FileOutputStream fileOutputStream = new FileOutputStream(outPath + ConstKit.MAPPER_OUT_PATH + "/" + className + ConstKit.OUT_FILE_SUFFIX)){

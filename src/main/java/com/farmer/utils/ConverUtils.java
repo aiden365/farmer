@@ -70,8 +70,11 @@ public class ConverUtils {
         TokenizerEngine engine = TokenizerUtil.createEngine();
 
         Result result = engine.parse(tableName);
+        List<String> collect = Arrays.asList(CollUtil.join(((Iterator<Word>) result), "").split("_")).stream().map(v -> StrUtil.upperFirst(v)).collect(Collectors.toList());
 
-        return CollUtil.join(Arrays.asList(CollUtil.join(((Iterator<Word>)result), "").split("_")).stream().map(v -> StrUtil.upperFirst(v)).collect(Collectors.toList()),"");
+        collect.remove(0);
+
+        return CollUtil.join(collect,"");
 
     }
 

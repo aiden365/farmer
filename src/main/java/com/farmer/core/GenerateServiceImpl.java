@@ -60,16 +60,26 @@ public class GenerateServiceImpl extends BaseClassInfo {
 
         String primaryKeyType = ConverUtils.converJavaType(fieldInfo.getDatabaseType());
 
-        params.put("packageName", packageName);
+        String pojoPackageAllName = StrUtil.concat(false, packageName,".",ConstKit.DEFAULT_POJO_PACKAGE_NAME,".", pojoName);
+
+        String servicePackageAllName = StrUtil.concat(false, packageName,".",ConstKit.DEFAULT_SERVICE_PACKAGE_NAME,".", serviceName);
+
+        params.put("packageName", packageName + "." + ConstKit.DEFAULT_SERVICE_IMPL_PACKAGE_NAME);
         params.put("basePackageAllName", basePackageAllName);
         params.put("annotation", tableInfo.getAnnotation());
         params.put("author", author);
         params.put("createDate", DateUtil.format(createDate,ConstKit.DEFAULT_FORMAT));
         params.put("className", serviceImplName);
         params.put("serviceName", serviceName);
+        params.put("servicePackageAllName", servicePackageAllName);
+
+
         params.put("pojoName", pojoName);
         params.put("baseClassName", baseClassName);
         params.put("primaryKeyType", primaryKeyType);
+
+        params.put("pojoPackageAllName", pojoPackageAllName);
+
 
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
              FileOutputStream fileOutputStream = new FileOutputStream(outPath + ConstKit.SERVICE_IMPL_OUT_PATH + "/" + serviceImplName + ConstKit.OUT_FILE_SUFFIX)){

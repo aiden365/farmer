@@ -75,19 +75,19 @@ public class ConstKit {
 
 
     /**
-     * 业务接口名标志
+     * 业务接口标志
      */
     public static final String SERVICE_NAME_MARK = "Service";
 
     /**
-     * 业务接口实现类存放目录
+     * 业务接口实现类标志
      */
     public static final String SERVICE_IMPL_NAME_MARK= "ServiceImpl";
 
     /**
-     * 数据层接口存放目录
+     * 数据层接口标志
      */
-    public static final String MAPPER_NAME_MARK = "Mapper";
+    public static final String MAPPER_NAME_MARK = "Repository";
 
 
 
@@ -97,8 +97,10 @@ public class ConstKit {
     public static final String DEFAULT_AUTHOR = "automatic";
     public static final String DEFAULT_FORMAT = "yyyy-MM-dd HH:mm";
 
-
-
+    public static final String DEFAULT_POJO_PACKAGE_NAME = "entity";
+    public static final String DEFAULT_SERVICE_PACKAGE_NAME = "service";
+    public static final String DEFAULT_SERVICE_IMPL_PACKAGE_NAME = "service.impl";
+    public static final String DEFAULT_REPOSITORY_PACKAGE_NAME = "repository";
 
 
     static {

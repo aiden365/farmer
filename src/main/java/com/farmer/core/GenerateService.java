@@ -11,6 +11,7 @@ import com.farmer.utils.ConverUtils;
 import com.farmer.utils.TemplateUtils;
 
 import java.io.*;
+import java.text.MessageFormat;
 import java.util.List;
 
 public class GenerateService extends BaseClassInfo {
@@ -58,7 +59,9 @@ public class GenerateService extends BaseClassInfo {
 
         String primaryKeyType = ConverUtils.converJavaType(fieldInfo.getDatabaseType());
 
-        params.put("packageName", packageName);
+        String pojoPackageAllName = StrUtil.concat(false, packageName,".",ConstKit.DEFAULT_POJO_PACKAGE_NAME,".", pojoName);
+
+        params.put("packageName", packageName + "." + ConstKit.DEFAULT_SERVICE_PACKAGE_NAME);
         params.put("basePackageAllName", basePackageAllName);
         params.put("annotation", tableInfo.getAnnotation());
         params.put("author", author);
@@ -67,6 +70,10 @@ public class GenerateService extends BaseClassInfo {
         params.put("pojoName", pojoName);
         params.put("baseClassName", baseClassName);
         params.put("primaryKeyType", primaryKeyType);
+
+
+        params.put("pojoPackageAllName", pojoPackageAllName);
+
 
         try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
              FileOutputStream fileOutputStream = new FileOutputStream(outPath + ConstKit.SERVICE_OUT_PATH + "/" + className + ConstKit.OUT_FILE_SUFFIX)){

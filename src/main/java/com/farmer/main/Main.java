@@ -1,5 +1,6 @@
 package com.farmer.main;
 
+import cn.hutool.core.io.FileUtil;
 import com.farmer.core.*;
 import com.farmer.exception.ParamsMissingException;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
@@ -44,6 +45,8 @@ public class Main {
     public static void main(String[] args) {
 
 
+        FileUtil.del("F:\\outPath\\temp");
+
         try {
             GenerateBase.init(driver, url, username, password, databaseName, tableName, outPath);
         } catch (ParamsMissingException e) {
@@ -67,20 +70,22 @@ public class Main {
             e.printStackTrace();
         }
 
-        GeneratePojo generatePojo = new GeneratePojo(null,null,null);
+        String packageName = "com.auth.core";
+
+        GeneratePojo generatePojo = new GeneratePojo(packageName,"com.auth.base.BaseEntity",null);
         generatePojo.generate();
+//
+//        GenerateService generateService = new GenerateService(packageName,"com.auth.base.BaseService",null);
+//        generateService.generate();
+//
+//        GenerateServiceImpl generateService1 = new GenerateServiceImpl(packageName,"com.auth.base.BaseServiceImpl",null);
+//        generateService1.generate();
+//
+//        GenerateDao generateDao = new GenerateDao(packageName,"com.auth.base.BaseRepository",null);
+//        generateDao.generate();
 
-        GenerateService generateService = new GenerateService(null,null,null);
-        generateService.generate();
-
-        GenerateServiceImpl generateService1 = new GenerateServiceImpl(null,null,null);
-        generateService1.generate();
-
-        GenerateDao generateDao = new GenerateDao(null,null);
-        generateDao.generate();
-
-        GenerateXml generateXml = new GenerateXml(null, null);
-        generateXml.generate();
+//        GenerateXml generateXml = new GenerateXml(null, packageName);
+//        generateXml.generate();
 
     }
 
