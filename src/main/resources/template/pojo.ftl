@@ -54,11 +54,26 @@ public class ${className} ${(baseClassName??)?string("extends ${baseClassName?if
 
 <#list fields as field>
 
- /**
- * ${field.annotation}
- */
- @Column(name = "${field.columnName}")
- private ${field.javaType} ${field.propertyName};
+ <#if field.isKey>
+
+  /**
+  * 主键
+  */
+  @Id
+  @Column
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private ${field.javaType} ${field.propertyName};
+
+ <#else >
+
+  /**
+  * ${field.annotation}
+  */
+  @Column(name = "${field.columnName}")
+  private ${field.javaType} ${field.propertyName};
+
+ </#if>
+
 
 </#list>
 

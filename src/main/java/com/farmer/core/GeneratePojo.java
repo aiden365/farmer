@@ -56,7 +56,7 @@ public class GeneratePojo extends BaseClassInfo{
 
         List<Field> fields = fieldInfos.stream().map(fieldInfo -> {
 
-            return new Field(ConverUtils.converJavaType(fieldInfo.getDatabaseType()), fieldInfo.getAnnotation(), ConverUtils.converJavaProperty(fieldInfo.getName()), fieldInfo.getName());
+            return new Field(ConverUtils.converJavaType(fieldInfo.getDatabaseType()), fieldInfo.getAnnotation(), ConverUtils.converJavaProperty(fieldInfo.getName()), fieldInfo.getName(), fieldInfo.getIsKey() == 1);
 
         }).collect(Collectors.toList());
 
@@ -102,13 +102,14 @@ public class GeneratePojo extends BaseClassInfo{
         private String annotation;
         private String propertyName;
         private String columnName;
+        private Boolean isKey;
 
-
-        public Field(String javaType, String annotation, String propertyName, String columnName) {
+        public Field(String javaType, String annotation, String propertyName, String columnName, Boolean isKey) {
             this.javaType = javaType;
             this.annotation = annotation;
             this.propertyName = propertyName;
             this.columnName = columnName;
+            this.isKey = isKey;
         }
     }
 

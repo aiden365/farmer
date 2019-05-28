@@ -17,9 +17,9 @@ import java.sql.SQLSyntaxErrorException;
 public class Main {
 
     private static String driver = "com.mysql.jdbc.Driver";
-    private static String url = "jdbc:mysql://212.103.62.162:3306";
+    private static String url = "jdbc:mysql://212.103.62.162:1430";
     private static String username = "root";
-    private static String password = "123456";
+    private static String password = "E%azeEbhRD9x7cYB";
 
 
     /**
@@ -45,7 +45,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-        FileUtil.del("F:\\outPath\\temp");
+        FileUtil.del(outPath);
 
         try {
             GenerateBase.init(driver, url, username, password, databaseName, tableName, outPath);
